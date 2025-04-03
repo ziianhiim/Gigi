@@ -1,5 +1,4 @@
-<!DOCTYPE html><html lang="vi">
-<head>
+<!DOCTYPE html><html lang="vi"><head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AZ Tìm Kiếm</title>
@@ -105,7 +104,9 @@
             document.getElementById("iframe2").style.display = currentIframe === 2 ? "block" : "none";
         }
         function clearOnFocus() {
-            document.getElementById("searchBox").value = "";
+            setTimeout(() => {
+                document.getElementById("searchBox").value = "";
+            }, 10);
         }
     </script>
 </body>
