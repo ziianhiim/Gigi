@@ -1,4 +1,5 @@
-<!DOCTYPE html><html lang="vi">
+<!DOCTYPE html>
+<html lang="vi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,7 +8,6 @@
         body, html { margin: 0; height: 100%; background: #222; color: #ddd; }
         .search-container { 
             display: flex; 
-            flex-direction: column; 
             align-items: center; 
             position: fixed; 
             bottom: 10px; 
@@ -19,9 +19,10 @@
             width: 90%;
             max-width: 500px;
             transition: bottom 0.3s;
+            box-sizing: border-box;
         }
         input { 
-            width: 95%; 
+            flex: 1;
             padding: 8px; 
             border-radius: 6px; 
             background: #444; 
@@ -30,14 +31,17 @@
             text-align: left; 
             border: 1px solid #555;
             font-size: 14px;
+            margin-right: 8px;
+            box-sizing: border-box;
         }
         .button-group {
             display: flex;
-            justify-content: space-between;
-            width: 100%;
-            margin-top: 8px;
+            gap: 8px;
+            justify-content: center; /* Căn giữa các nút */
+            align-items: center;
+            flex-shrink: 0; /* Ngừng co lại để tránh tràn */
         }
-        .btn-search, .btn-clear, .toggle-button { 
+        .btn-search, .toggle-button { 
             border: none; 
             background: none; 
             cursor: pointer;
@@ -49,11 +53,12 @@
             gap: 5px;
             color: #ddd;
             transition: all 0.3s ease;
+            text-align: center;
         }
-        .btn-search:hover, .btn-clear:hover, .toggle-button:hover {
+        .btn-search:hover, .toggle-button:hover {
             background: #555;
         }
-        .btn-search svg, .btn-clear svg, .toggle-button svg {
+        .btn-search svg, .toggle-button svg {
             width: 20px;
             height: 20px;
             fill: #ddd;
@@ -73,19 +78,13 @@
         <iframe id="iframe2" style="display:none"></iframe>
     </div>
     <div class="search-container" id="searchContainer">
-        <input type="text" id="searchBox" placeholder="Nhập nội dung tìm kiếm..." onfocus="raiseInput()" onblur="resetInput()" onkeydown="if(event.key === 'Enter') search()">
+        <input type="text" id="searchBox" placeholder="Bạn cần tìm phim gì?" onfocus="clearOnFocus()" onkeydown="if(event.key === 'Enter') search()">
         <div class="button-group">
-            <button class="btn-clear" onclick="clearInput()">
-                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M6 6l12 12M18 6L6 18" stroke="white" stroke-width="2" stroke-linecap="round"/></svg>
-                <span style="color: #ddd;">Xóa</span>
+            <button class="btn-search" onclick="search()">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10 2a8 8 0 1 1-6.32 12.906l-3.387 3.387 1.414 1.414 3.387-3.387A8 8 0 0 1 10 2zm0 2a6 6 0 1 0 0 12 6 6 0 0 0 0-12z"></path></svg>
             </button>
             <button class="toggle-button" onclick="toggleIframe()">
                 <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 22c5.421 0 10-4.579 10-10S17.421 2 12 2 2 6.579 2 12s4.579 10 10 10Zm0-2c-4.411 0-8-3.589-8-8s3.589-8 8-8 8 3.589 8 8-3.589 8-8 8Zm3.707-10.707-1.414-1.414L12 10.172 9.707 7.879l-1.414 1.414L10.172 12l-1.879 1.879 1.414 1.414L12 13.828l2.293 2.293 1.414-1.414L13.828 12l1.879-1.879Z"></path></svg>
-                <span style="color: #ddd;">Chuyển</span>
-            </button>
-            <button class="btn-search" onclick="search()">
-                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10 2a8 8 0 1 1-6.32 12.906l-3.387 3.387 1.414 1.414 3.387-3.387A8 8 0 0 1 10 2zm0 2a6 6 0 1 0 0 12 6 6 0 0 0 0-12z"></path></svg>
-                <span style="color: #ddd;">Tìm</span>
             </button>
         </div>
     </div>
@@ -101,17 +100,13 @@
                 document.getElementById("iframeContainer").style.display = "flex";
             }
         }
-        function clearInput() { document.getElementById("searchBox").value = ""; }
         function toggleIframe() {
             currentIframe = currentIframe === 1 ? 2 : 1;
             document.getElementById("iframe1").style.display = currentIframe === 1 ? "block" : "none";
             document.getElementById("iframe2").style.display = currentIframe === 2 ? "block" : "none";
         }
-        function raiseInput() {
-            document.getElementById("searchContainer").style.bottom = "5px";
-        }
-        function resetInput() {
-            document.getElementById("searchContainer").style.bottom = "10px";
+        function clearOnFocus() {
+            document.getElementById("searchBox").value = "";
         }
     </script>
 </body>
