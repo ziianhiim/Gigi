@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-<html lang="vi">
+<!DOCTYPE html><html lang="vi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -37,9 +36,9 @@
         .button-group {
             display: flex;
             gap: 8px;
-            justify-content: center; /* Căn giữa các nút */
+            justify-content: center;
             align-items: center;
-            flex-shrink: 0; /* Ngừng co lại để tránh tràn */
+            flex-shrink: 0;
         }
         .btn-search, .toggle-button { 
             border: none; 
@@ -105,19 +104,9 @@
             document.getElementById("iframe1").style.display = currentIframe === 1 ? "block" : "none";
             document.getElementById("iframe2").style.display = currentIframe === 2 ? "block" : "none";
         }
-        function adjustForKeyboard() {
-    const searchContainer = document.getElementById("searchContainer");
-    window.addEventListener("resize", () => {
-        if (window.innerHeight < 500) { // Khi bàn phím bật (chiều cao màn hình giảm)
-            searchContainer.style.position = "absolute";
-            searchContainer.style.bottom = "100px"; // Đẩy lên cao hơn
-        } else { // Khi bàn phím tắt
-            searchContainer.style.position = "fixed";
-            searchContainer.style.bottom = "10px";
+        function clearOnFocus() {
+            document.getElementById("searchBox").value = "";
         }
-    });
-}
-adjustForKeyboard();
     </script>
 </body>
 </html>
